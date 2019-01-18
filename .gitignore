@@ -1,0 +1,7 @@
+CMake
+glfw-3.2.1
+CMakeCache.txt
+CMakeFiles
+Makefile
+*.cmake
+dummy
