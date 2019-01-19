@@ -5,3 +5,4 @@ CMakeFiles
 Makefile
 *.cmake
 ep*
+glew-2.1.0
