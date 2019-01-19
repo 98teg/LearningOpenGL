@@ -4,4 +4,4 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 *.cmake
-dummy
+ep*
