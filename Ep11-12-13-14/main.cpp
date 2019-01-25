@@ -10,6 +10,7 @@
 #include "Renderer.hpp"
 
 #include "VertexBuffer.hpp"
+#include "VertexBufferLayout.hpp"
 #include "VertexArray.hpp"
 #include "IndexBuffer.hpp"
 #include "Shader.hpp"
@@ -67,19 +68,18 @@ int main(void){
 		IndexBuffer index_buffer(indices, 6);
 
 		Shader shader("Ep11-12-13-14/res/shaders/basicVertex.shader", "Ep11-12-13-14/res/shaders/basicFragment.shader");
-		shader.Bind();
 
 		float red = 0, green = 0, blue = 0;
 		int color = 0;
 		bool asc = true;
 
-		vertex_array.Bind();
+		Renderer renderer;
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
 		    /* Render here */
-		    glClear(GL_COLOR_BUFFER_BIT);
+		    renderer.Clear();
 
 			if(asc){
 				if(color == 0 && red >= 1){
@@ -117,9 +117,11 @@ int main(void){
 				}
 				else blue = blue - 0.1f;
 			}
-	 
+
+
+			shader.Bind();
 			shader.SetUniform4f("u_Color", red, green, blue, 1.0f);
-			GLCall(glDrawElements(GL_TRIANGLES, 3 * 2, GL_UNSIGNED_INT, nullptr));
+			renderer.Draw(vertex_array, index_buffer, shader);
 
 		    /* Swap front and back buffers */
 		    glfwSwapBuffers(window);
