@@ -22,7 +22,7 @@ ADD_EXECUTABLE(ep7 Ep7/main.cpp)
 ADD_EXECUTABLE(ep8 Ep8/main.cpp)
 ADD_EXECUTABLE(ep9 Ep9/main.cpp)
 ADD_EXECUTABLE(ep10 Ep10/main.cpp)
-ADD_EXECUTABLE(ep11-12-13-14 Ep11-12-13-14/Renderer.cpp Ep11-12-13-14/VertexBuffer.cpp Ep11-12-13-14/IndexBuffer.cpp Ep11-12-13-14/VertexBufferLayout.cpp Ep11-12-13-14/VertexArray.cpp Ep11-12-13-14/main.cpp)
+ADD_EXECUTABLE(ep11-12-13-14 Ep11-12-13-14/Renderer.cpp Ep11-12-13-14/VertexBuffer.cpp Ep11-12-13-14/IndexBuffer.cpp Ep11-12-13-14/VertexBufferLayout.cpp Ep11-12-13-14/VertexArray.cpp Ep11-12-13-14/Shader.cpp Ep11-12-13-14/main.cpp)
 
 TARGET_LINK_LIBRARIES(ep0 glfw)
 TARGET_LINK_LIBRARIES(ep1 glfw)

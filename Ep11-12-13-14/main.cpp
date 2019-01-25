@@ -12,61 +12,7 @@
 #include "VertexBuffer.hpp"
 #include "VertexArray.hpp"
 #include "IndexBuffer.hpp"
-
-static std::string GetShader(const std::string& filepath){
-	std::ifstream stream(filepath);
-	std::string shader;
-
-	std::string line;
-	while(getline(stream, line)){
-		shader = shader + line + '\n';
-	}
-
-	return shader;
-}
-
-static unsigned int CompileShader(	unsigned int type,
-									const std::string &source){
-	unsigned int id = glCreateShader(type);
-	const char* src = source.c_str();
-	glShaderSource(id, 1, &src, nullptr);
-	glCompileShader(id);
-
-	int result;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-	if(result == GL_FALSE){
-		int length;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-		char* message = (char*) alloca(length * sizeof(char));
-		glGetShaderInfoLog(id, length, &length, message);
-
-		std::cout << "Failed to compile " <<
-			(type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader!" << std::endl;
-		std::cout << message << std::endl;
-
-		glDeleteShader(id);
-		return 0;
-	}
-
-	return id;
-}
-
-static unsigned int CreateShader(	const std::string& vertexShader,
-									const std::string& fragmentShader){
-	unsigned int program = glCreateProgram();
-	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
-
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
-	glValidateProgram(program);
-
-	glDeleteShader(vs);
-	glDeleteShader(fs);
-
-	return program;
-}
+#include "Shader.hpp"
 
 int main(void){
     GLFWwindow* window;
@@ -120,14 +66,8 @@ int main(void){
 
 		IndexBuffer index_buffer(indices, 6);
 
-		std::string vertexShader = GetShader("Ep9/res/shaders/basicVertex.shader");
-		std::string fragmentShader = GetShader("Ep9/res/shaders/basicFragment.shader");
-
-		unsigned int shader = CreateShader(vertexShader, fragmentShader);
-		GLCall(glUseProgram(shader));
-
-		int location = glGetUniformLocation(shader, "u_Color");
-		assert(location != -1);
+		Shader shader("Ep11-12-13-14/res/shaders/basicVertex.shader", "Ep11-12-13-14/res/shaders/basicFragment.shader");
+		shader.Bind();
 
 		float red = 0, green = 0, blue = 0;
 		int color = 0;
@@ -178,7 +118,7 @@ int main(void){
 				else blue = blue - 0.1f;
 			}
 	 
-			GLCall(glUniform4f(location, red, green, blue, 1.0f));
+			shader.SetUniform4f("u_Color", red, green, blue, 1.0f);
 			GLCall(glDrawElements(GL_TRIANGLES, 3 * 2, GL_UNSIGNED_INT, nullptr));
 
 		    /* Swap front and back buffers */
@@ -187,9 +127,6 @@ int main(void){
 		    /* Poll for and process events */
 		    glfwPollEvents();
 		}
-
-		glDeleteProgram(shader);
-
 	}
 
     glfwTerminate();
