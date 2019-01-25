@@ -10,6 +10,7 @@
 #include "Renderer.hpp"
 
 #include "VertexBuffer.hpp"
+#include "VertexArray.hpp"
 #include "IndexBuffer.hpp"
 
 static std::string GetShader(const std::string& filepath){
@@ -110,14 +111,12 @@ int main(void){
 			2, 3, 0
 		};
 
-		unsigned int vertex_array;
-		GLCall(glGenVertexArrays(1, &vertex_array));
-		GLCall(glBindVertexArray(vertex_array));
-
+		VertexArray vertex_array;
 		VertexBuffer vertex_buffer(positions, 4 * 2 * sizeof(float));
 
-		GLCall(glEnableVertexAttribArray(0));
-		GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
+		VertexBufferLayout layout;
+		layout.Push<float>(2);
+		vertex_array.AddBuffer(vertex_buffer, layout);
 
 		IndexBuffer index_buffer(indices, 6);
 
@@ -133,6 +132,8 @@ int main(void){
 		float red = 0, green = 0, blue = 0;
 		int color = 0;
 		bool asc = true;
+
+		vertex_array.Bind();
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))

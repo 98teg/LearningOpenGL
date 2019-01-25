@@ -6,9 +6,9 @@ class VertexBuffer
 	private:
 		unsigned int RendererID;
 
-		inline unsigned int getRendererID() const{ return RendererID;};
+		inline unsigned int GetRendererID() const{ return RendererID;};
 
-		inline void setRendererID(unsigned int id){ RendererID = id;};
+		inline void SetRendererID(unsigned int id){ RendererID = id;};
 	public:
 		VertexBuffer(const void* data, unsigned int size);
 		~VertexBuffer();
