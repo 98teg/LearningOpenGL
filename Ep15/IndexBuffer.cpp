@@ -1,7 +1,10 @@
 #include "IndexBuffer.hpp"
 #include "Renderer.hpp"
 
+#include <cassert>
+
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count){
+	assert(sizeof(unsigned int) == sizeof(GLuint));
 	unsigned int buffer;
 
 	GLCall(glGenBuffers(1, &buffer));

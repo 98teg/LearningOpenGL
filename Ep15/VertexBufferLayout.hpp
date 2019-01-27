@@ -13,9 +13,9 @@ struct VertexBufferLayoutElement
 
 	static unsigned int GetSizeOfType(unsigned int type){
 		switch(type){
-			case GL_FLOAT: return 4;
-			case GL_UNSIGNED_INT: return 4;
-			case GL_UNSIGNED_BYTE: return 1;
+			case GL_FLOAT: return sizeof(float);
+			case GL_UNSIGNED_INT: return sizeof(unsigned int);
+			case GL_UNSIGNED_BYTE: return sizeof(unsigned char);
 		}
 
 		assert(false);

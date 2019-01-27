@@ -74,14 +74,10 @@ int main(void){
 
 		Shader shader("Ep15/res/shaders/basicVertex.shader", "Ep15/res/shaders/basicFragment.shader");
 
-		Texture texture("Ep15/res/textures/sample.png");
+		Texture texture("/home/tomas/Escritorio/OpenGL/LearningOpenGL/Ep15/res/textures/sample.png");
 		texture.Bind();
 		shader.Bind();
 		shader.SetUniform1i("u_Texture", 0);
-
-		float red = 0, green = 0, blue = 0;
-		int color = 0;
-		bool asc = true;
 
 		Renderer renderer;
 
@@ -91,46 +87,6 @@ int main(void){
 		    /* Render here */
 		    renderer.Clear();
 
-			if(asc){
-				if(color == 0 && red >= 1){
-					color = 1;
-					green = green + 0.1f;
-				}
-				else if(color == 0) red = red + 0.1f;
-				else if(color == 1 && green >= 1){
-					color = 2;
-					blue = blue + 0.1f;
-				}
-				else if(color == 1) green = green + 0.1f;
-				else if(color == 2 && blue >= 1){
-					color = 0;
-					red = red - 0.1f;
-					asc = false;
-				}
-				else blue = blue + 0.1f;
-			}
-			else{
-				if(color == 0 && red <= 0){
-					color = 1;
-					green = green - 0.1f;
-				}
-				else if(color == 0) red = red - 0.1f;
-				else if(color == 1 && green <= 0){
-					color = 2;
-					blue = blue - 0.1f;
-				}
-				else if(color == 1) green = green - 0.1f;
-				else if(color == 2 && blue <= 0){
-					color = 0;
-					red = red + 0.1f;
-					asc = true;
-				}
-				else blue = blue - 0.1f;
-			}
-
-
-			shader.Bind();
-			shader.SetUniform4f("u_Color", red, green, blue, 1.0f);
 			renderer.Draw(vertex_array, index_buffer, shader);
 
 		    /* Swap front and back buffers */
