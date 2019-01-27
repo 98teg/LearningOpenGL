@@ -16,8 +16,8 @@
 #include "Texture.hpp"
 #include "Shader.hpp"
 
-#include "vendor/glm/glm.hpp"
-#include "vendor/glm/gtc/matrix_transform.hpp"
+#include "../glm/glm.hpp"
+#include "../glm/gtc/matrix_transform.hpp"
 
 int main(void){
     GLFWwindow* window;
