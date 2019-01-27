@@ -16,6 +16,9 @@
 #include "Texture.hpp"
 #include "Shader.hpp"
 
+#include "vendor/glm/glm.hpp"
+#include "vendor/glm/gtc/matrix_transform.hpp"
+
 int main(void){
     GLFWwindow* window;
 
@@ -72,12 +75,16 @@ int main(void){
 
 		IndexBuffer index_buffer(indices, 6);
 
-		Shader shader("Ep15/res/shaders/basicVertex.shader", "Ep15/res/shaders/basicFragment.shader");
+		glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
 
-		Texture texture("/home/tomas/Escritorio/OpenGL/LearningOpenGL/Ep15/res/textures/sample.png");
+		Shader shader("Ep17-18/res/shaders/basicVertex.shader", "Ep17-18/res/shaders/basicFragment.shader");
+
+		Texture texture("Ep17-18/res/textures/sample.png");
 		texture.Bind();
 		shader.Bind();
 		shader.SetUniform1i("u_Texture", 0);
+
+		shader.SetUniformMat4f("u_MVP", proj);
 
 		Renderer renderer;
 
