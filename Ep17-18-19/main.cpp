@@ -51,10 +51,10 @@ int main(void){
 
 	{
 		float positions[16] = {
-			-0.5f, -0.5f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 1.0f, 0.0f,
-			 0.5f,  0.5f, 1.0f, 1.0f,
-			-0.5f,  0.5f, 0.0f, 1.0f
+			100.0f, 100.0f, 0.0f, 0.0f,
+			200.0f, 100.0f, 1.0f, 0.0f,
+			200.0f, 200.0f, 1.0f, 1.0f,
+			100.0f, 200.0f, 0.0f, 1.0f
 		};
 
 		unsigned int indices[6] = {
@@ -75,16 +75,20 @@ int main(void){
 
 		IndexBuffer index_buffer(indices, 6);
 
-		glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+		glm::mat4 proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
 
-		Shader shader("Ep17-18/res/shaders/basicVertex.shader", "Ep17-18/res/shaders/basicFragment.shader");
+		glm::mat4 mvp = proj * view * model;
 
-		Texture texture("Ep17-18/res/textures/sample.png");
+		Shader shader("Ep17-18-19/res/shaders/basicVertex.shader", "Ep17-18-19/res/shaders/basicFragment.shader");
+
+		Texture texture("Ep17-18-19/res/textures/sample.png");
 		texture.Bind();
 		shader.Bind();
 		shader.SetUniform1i("u_Texture", 0);
 
-		shader.SetUniformMat4f("u_MVP", proj);
+		shader.SetUniformMat4f("u_MVP", mvp);
 
 		Renderer renderer;
 
