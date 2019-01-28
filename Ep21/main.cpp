@@ -54,10 +54,10 @@ int main(void){
 
 	{
 		float positions[16] = {
-			100.0f, 100.0f, 0.0f, 0.0f,
-			200.0f, 100.0f, 1.0f, 0.0f,
-			200.0f, 200.0f, 1.0f, 1.0f,
-			100.0f, 200.0f, 0.0f, 1.0f
+			-50.0f, -50.0f, 0.0f, 0.0f,
+			 50.0f, -50.0f, 1.0f, 0.0f,
+			 50.0f,  50.0f, 1.0f, 1.0f,
+			-50.0f,  50.0f, 0.0f, 1.0f
 		};
 
 		unsigned int indices[6] = {
@@ -79,11 +79,11 @@ int main(void){
 		IndexBuffer index_buffer(indices, 6);
 
 		glm::mat4 proj = glm::ortho(0.0f, 640.0f, 0.0f, 480.0f, -1.0f, 1.0f);
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0));
+		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
-		Shader shader("Ep20/res/shaders/basicVertex.shader", "Ep20/res/shaders/basicFragment.shader");
+		Shader shader("Ep21/res/shaders/basicVertex.shader", "Ep21/res/shaders/basicFragment.shader");
 
-		Texture texture("Ep20/res/textures/sample.png");
+		Texture texture("Ep21/res/textures/sample.png");
 		texture.Bind();
 		shader.Bind();
 		shader.SetUniform1i("u_Texture", 0);
@@ -95,7 +95,8 @@ int main(void){
 
 		ImGui::StyleColorsDark();
 
-		glm::vec3 translation(200, 200, 0);
+		glm::vec3 translationA(200, 200, 0);
+		glm::vec3 translationB(300, 200, 0);
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
@@ -103,20 +104,28 @@ int main(void){
 		    /* Render here */
 		    renderer.Clear();
 
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
+			{
+				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+				glm::mat4 mvp = proj * view * model;
+				shader.SetUniformMat4f("u_MVP", mvp);
 
-			glm::mat4 mvp = proj * view * model;
-			shader.SetUniformMat4f("u_MVP", mvp);
+				renderer.Draw(vertex_array, index_buffer, shader);
+			}
+
+			{
+				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
+				glm::mat4 mvp = proj * view * model;
+				shader.SetUniformMat4f("u_MVP", mvp);
+
+				renderer.Draw(vertex_array, index_buffer, shader);
+			}
 
 			ImGui_ImplGlfwGL3_NewFrame();
-
-			renderer.Draw(vertex_array, index_buffer, shader);
-
 		    {
-		        ImGui::SliderFloat2("float", &translation.x, 0.0f, 640.0f);
+		        ImGui::SliderFloat2("Translation A", &translationA.x, 0.0f, 640.0f);
+		        ImGui::SliderFloat2("Translation B", &translationB.x, 0.0f, 640.0f);
 		        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		    }
-
 			ImGui::Render();
 			ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 

@@ -26,6 +26,7 @@ ADD_EXECUTABLE(ep11-12-13-14 Ep11-12-13-14/Renderer.cpp Ep11-12-13-14/VertexBuff
 ADD_EXECUTABLE(ep15-16 Ep15-16/vendor/stb_image/stb_image.cpp Ep15-16/Texture.cpp Ep15-16/Renderer.cpp Ep15-16/VertexBuffer.cpp Ep15-16/IndexBuffer.cpp Ep15-16/VertexBufferLayout.cpp Ep15-16/VertexArray.cpp Ep15-16/Shader.cpp Ep15-16/main.cpp)
 ADD_EXECUTABLE(ep17-18-19 Ep17-18-19/vendor/stb_image/stb_image.cpp Ep17-18-19/Texture.cpp Ep17-18-19/Renderer.cpp Ep17-18-19/VertexBuffer.cpp Ep17-18-19/IndexBuffer.cpp Ep17-18-19/VertexBufferLayout.cpp Ep17-18-19/VertexArray.cpp Ep17-18-19/Shader.cpp Ep17-18-19/main.cpp)
 ADD_EXECUTABLE(ep20 Ep20/vendor/imgui/imgui_demo.cpp Ep20/vendor/imgui/imgui_draw.cpp Ep20/vendor/imgui/imgui.cpp Ep20/vendor/imgui/imgui_impl_glfw_gl3.cpp Ep20/vendor/stb_image/stb_image.cpp Ep20/Texture.cpp Ep20/Renderer.cpp Ep20/VertexBuffer.cpp Ep20/IndexBuffer.cpp Ep20/VertexBufferLayout.cpp Ep20/VertexArray.cpp Ep20/Shader.cpp Ep20/main.cpp)
+ADD_EXECUTABLE(ep21 Ep21/vendor/imgui/imgui_demo.cpp Ep21/vendor/imgui/imgui_draw.cpp Ep21/vendor/imgui/imgui.cpp Ep21/vendor/imgui/imgui_impl_glfw_gl3.cpp Ep21/vendor/stb_image/stb_image.cpp Ep21/Texture.cpp Ep21/Renderer.cpp Ep21/VertexBuffer.cpp Ep21/IndexBuffer.cpp Ep21/VertexBufferLayout.cpp Ep21/VertexArray.cpp Ep21/Shader.cpp Ep21/main.cpp)
 
 TARGET_LINK_LIBRARIES(ep0 glfw)
 TARGET_LINK_LIBRARIES(ep1 glfw)
@@ -41,6 +42,7 @@ TARGET_LINK_LIBRARIES(ep11-12-13-14 glfw)
 TARGET_LINK_LIBRARIES(ep15-16 glfw)
 TARGET_LINK_LIBRARIES(ep17-18-19 glfw)
 TARGET_LINK_LIBRARIES(ep20 glfw)
+TARGET_LINK_LIBRARIES(ep21 glfw)
 
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(GLEW REQUIRED)
@@ -60,6 +62,7 @@ TARGET_INCLUDE_DIRECTORIES(ep11-12-13-14 PRIVATE ${OPENGL_INCLUDE_DIR} ${GLEW_IN
 TARGET_INCLUDE_DIRECTORIES(ep15-16 PRIVATE ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
 TARGET_INCLUDE_DIRECTORIES(ep17-18-19 PRIVATE ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
 TARGET_INCLUDE_DIRECTORIES(ep20 PRIVATE ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
+TARGET_INCLUDE_DIRECTORIES(ep21 PRIVATE ${OPENGL_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
 
 TARGET_LINK_LIBRARIES(ep0 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
 TARGET_LINK_LIBRARIES(ep1 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
@@ -75,3 +78,4 @@ TARGET_LINK_LIBRARIES(ep11-12-13-14 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
 TARGET_LINK_LIBRARIES(ep15-16 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
 TARGET_LINK_LIBRARIES(ep17-18-19 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
 TARGET_LINK_LIBRARIES(ep20 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
+TARGET_LINK_LIBRARIES(ep21 ${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES})
