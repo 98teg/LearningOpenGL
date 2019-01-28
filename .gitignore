@@ -7,3 +7,4 @@ Makefile
 ep*
 glew-2.1.0
 glm
+imgui.ini
