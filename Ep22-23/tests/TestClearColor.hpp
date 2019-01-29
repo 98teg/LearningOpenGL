@@ -36,9 +36,8 @@ namespace test{
 			TestClearColor();
 			~TestClearColor();
 
-			void onUpdate(float deltaTime) override;
-			void onRender() override;
-			void onImguiRender() override;
+			void OnRender() override;
+			void OnImGuiRender() override;
 	};
 
 }

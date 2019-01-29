@@ -14,16 +14,12 @@ namespace test{
 
 	}
 
-	void TestClearColor::onUpdate(float deltaTime){
-
-	}
-
-	void TestClearColor::onRender(){
+	void TestClearColor::OnRender(){
 		GLCall(glClearColor(GetRed(), GetGreen(), GetBlue(), GetAlpha()));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 	}
 
-	void TestClearColor::onImguiRender(){
+	void TestClearColor::OnImGuiRender(){
 		float color[4];
 		GetColor(color);
 
