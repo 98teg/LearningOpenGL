@@ -23,6 +23,7 @@
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 
 #include "tests/TestClearColor.hpp"
+#include "tests/TestTexture2D.hpp"
 #include "tests/Test.hpp"
 
 int main(void){
@@ -66,6 +67,7 @@ int main(void){
 
 		test::TestMenu menu;
 		menu.RegisterTest<test::TestClearColor>("Clear Color");
+		menu.RegisterTest<test::TestTexture2D>("2D Texture");
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
@@ -96,6 +98,8 @@ int main(void){
 		    /* Poll for and process events */
 		    glfwPollEvents();
 		}
+
+		if(menu.IsTestSelected()) menu.DeselecteTest();
 	}
 
 	ImGui_ImplGlfwGL3_Shutdown();
